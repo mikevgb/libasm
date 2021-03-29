@@ -1,4 +1,4 @@
-int		ft_strcpy(char *origin, char *dest)
+int		ft_strcpy(char *dest, char *origin)
 {
 	int i;
 
