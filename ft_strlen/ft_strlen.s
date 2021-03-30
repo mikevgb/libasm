@@ -12,7 +12,7 @@ loop:
 	jmp	loop			; jump to loop
 
 exit:
-	ret					; return to the start of the function
+	ret					; return the result in rax
 
 
 ; nasm -f macho64 ft_strlen.s
