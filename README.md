@@ -1,6 +1,6 @@
 # libasm
 
-* Must be 64 buts ASM
+* Must be 64 bits ASM
 * Can't do inline ASM
 * Must compile with nasm
 * Must use Intel syntax
