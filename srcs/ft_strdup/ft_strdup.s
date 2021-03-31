@@ -17,7 +17,7 @@ _ft_strdup:
 
 _strcpy:
 	mov	rax, rdi
-loop:
+_strcpy_loop:
 	cmp BYTE[rsi], 0		; check if we are at the end of the string
 	jz	_ft_strdup			; if end was found move to exit
 	mov cl, BYTE[rsi]		; copy the first byte of origin to temp (cl)
@@ -26,7 +26,7 @@ loop:
 	mov BYTE[rdi], cl		; copy the first byte of temp to dest
 	inc rsi					; increase counter of origin
 	inc rdi					; increase counter of dest
-	jmp loop				; start loop again
+	jmp _strcpy_loop		; start loop again
 
 _strlen:
 	mov	rax, 0				; set rax to 0
@@ -36,5 +36,8 @@ loop:						; we calculate the size of s1 in bytes
 	inc rdi
 	jmp loop
 
-exit
+error:
+	call	___error
+
+exit:
 	ret
