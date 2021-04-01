@@ -6,18 +6,21 @@ global		_ft_strcpy
 ;	we cant copy directly to rdi, so we use rcx as temp
 
 _ft_strcpy:
-	mov rax, rdi		; mov rdi to rax
+	mov rax, 0		; set rax to 0
 
 loop:
-	cmp BYTE[rsi], 0	; check if we are at the end of the string
-	jz	exit			; if end was found move to exit
-	mov cl, BYTE[rsi]	; copy the first byte of origin to temp (cl)
+	mov cl, [rsi + rax]	; copy the first byte of origin and rax to temp (cl)
 						; we use cl operand because we only want to copy
-						; the first byte of rcx
-	mov BYTE[rdi], cl	; copy the first byte of temp to dest
-	inc rsi				; increase counter of origin
-	inc rdi				; increase counter of dest
+						; the first byte
+	cmp cl, 0			; check if we are at the end of the string
+	jz	exit			; if end was found move to exit
+	
+	mov [rdi + rax], cl	; copy the first byte of temp to dest and rax
+	inc rax				; increase counter of origin
 	jmp loop			; start loop again
 
 exit:
+	mov		cl, 0
+	mov	[rdi + rax], cl	; set last chars to 0
+	mov	rax, rdi		; copy dest to rax
 	ret
