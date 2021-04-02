@@ -6,22 +6,23 @@ global		_ft_strcmp
 ; > 0 if strB is less than strA and 0 if strA and strB are equal length
 
 _ft_strcmp:
-	mov rax, 0			; set rax to 0
 
-loop1:
-	cmp BYTE[rdi], 0	; check if strA has ended
-	jz	loop2			; jump to loop2 if strA has ended
-	inc	rdi				; increase rdi
-	jmp loop2			; jump to second loop
+loop:
+	mov	cl, BYTE[rsi]	; copy the first byte to cl reg
+	cmp cl, BYTE[rdi]	; check if values are equal
+	jne	return			; if not equal jump to notzero
+	cmp	cl, 0			; check if is 0
+	jz	return			; if 0 jump to zero
+	inc	rdi				; rdi++
+	inc	rsi				; rsi++
+	jmp	loop
 
-loop2:
-	cmp BYTE[rsi], 0	; check if strB has ended
-	jz	exit			; exit if strB has ended
-	inc	rsi				; increase rsi
-	jmp loop1			; start loop again
-	
-compare:
-	cmp rdi, rsi		; compare value of the 2 counters
+return:
+	mov		al, BYTE[rdi]	; copy first byte of rdi to al reg
+	movzx	rax, al			; copy al into rax and fill the left space with 0
+	movzx	rcx, cl			; copy cl into rcx and fill the left space with 0
+	sub		rax, rcx		; rcx - rax
+	jmp 	exit
 
 exit:
 	ret
