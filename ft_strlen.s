@@ -2,13 +2,13 @@ SECTION		.text
 global		_ft_strlen
 
 _ft_strlen:
-	mov rax, 0			; put rax to 0
+	mov rax, 0			; set rax to 0
 
 loop:
 	cmp BYTE[rdi], 0	; compare byte by byte if is end of string (0)
-	jz	exit			; jz cals exit if returns 0
+	jz	exit			; if cmp returns 0 jz cals exit
 	inc rdi				; increase one char to rdi
-	inc	rax				; increment RAX if 0 has not been found
+	inc	rax				; increment rax if 0 has not been found
 	jmp	loop			; jump to loop
 
 exit:

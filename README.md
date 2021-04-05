@@ -22,3 +22,14 @@ should show something similar to /usr/bin/nasm otherwise you will se just nasm:
 
 Links:
 https://www.plantation-productions.com/Webster/www.artofasm.com/index.html
+
+RAX is a 64 bit size register, is used to return values in functions.
+
+RDI "register destination index" used for passing arguments to functions.
+
+Example of compiling one function and the main:
+
+nasm -f macho64 ft_strlen.s
+gcc -c main_strlen.c
+gcc ft_strlen.o main_strlen.o
+./a.out "string"

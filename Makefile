@@ -1,29 +1,30 @@
-SRCS =	srcs/ft_read/ft_read.s \
-		srcs/ft_strcmp/ft_strcmp.s \
-		srcs/ft_strcpy/ft_strcpy.s \
-		srcs/ft_strdup/ft_strdup.s \
-		srcs/ft_strlen/ft_strlen.s \
-		srcs/ft_write/ft_write.s
+SRC =	ft_read.s \
+		ft_strcmp.s \
+		ft_strcpy.s \
+		ft_strdup.s \
+		ft_strlen.s \
+		ft_write.s
 
-OBJS =	$(SRCS:.s=.o)
+OBJS =	$(SRC:.s=.o)
 
-%.o	: %.s
+%.o	: %.s libasm.h
 	nasm -f macho64 $< -o $@
 
-NAME = 	libasm.a
+LIB = 	libasm.a
 
 RM	=	rm -rf
 
-$(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+$(LIB): $(OBJS)
+		ar rcs $(LIB) $(OBJS)
+		gcc -Wall -Wextra -Werror -o main.out main.c -L ./ -lasm
 
-all:	$(NAME)
+all:	$(LIB)
 
 clean:	
-		$(RM) $(OBJS)
+		$(RM) $(OBJS) main.out
 
 fclean:	clean
-		$(RM) $(NAME)
+		$(RM) $(LIB) main.out
 
 re:		fclean all
 
